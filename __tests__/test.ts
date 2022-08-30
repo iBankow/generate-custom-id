@@ -5,18 +5,18 @@ test("Generate a simple hash", () => {
   expect(newId).toMatch(/[0-9]{2}/);
 });
 test("Generate a hash with simple prefix", () => {
-  const newId = idGenerator("simple", undefined, { prefix: "pre" });
+  const newId = idGenerator("simple", undefined, undefined, { prefix: "pre" });
   expect(newId).toMatch(/pre[0-9]{2}/);
 });
 test("Generate a hash with simple sufix", () => {
-  const newId = idGenerator("simple", undefined, { sufix: "sux" });
-  expect(newId).toMatch(/[0-9]{2}[A-z|0-9]{8}sux/);
+  const newId = idGenerator("simple", undefined, undefined, { sufix: "sux" });
+  expect(newId).toMatch(/[0-9]{2}|[A-z|0-9]{6}|sux/);
 });
-test("Generate a hash with 4 random lenght", () => {
-  const newId = idGenerator("simple", 4);
-  expect(newId).toMatch(/[0-9]{4}/);
+test("Generate a hash with 4 PIN lenght and 8 random character", () => {
+  const newId = idGenerator("simple", 4, 6);
+  expect(newId).toMatch(/[0-9]{2}|[A-z|0-9]{8}/);
 });
 test("Generate a hash with prefix trace", () => {
-  const newId = idGenerator("simple", 4, { prefix: "pre", trace: true });
-  expect(newId).toMatch(/pre-[0-9]{4}/);
+  const newId = idGenerator("simple", undefined, undefined, { prefix: "pre", trace: true });
+  expect(newId).toMatch(/pre-[0-9]{2}|[A-z|0-9]{6}/);
 });

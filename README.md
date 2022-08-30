@@ -1,4 +1,3 @@
-
 # Generate Custom Random ID
 
 Simple custom random ID generator with Prefix and Suffix options
@@ -11,7 +10,7 @@ Install generate-custom-id with npm
   npm install generate-custom-id
 ```
 
-Install generate-custom-id yarn npm
+Install generate-custom-id with yarn
 
 ```bash
   yarn add generate-custom-id
@@ -24,7 +23,7 @@ Simple generation with a single name:
 ```javascript
 import { idGenerator } from "generate-custom-id";
 
-const id = idGenerator('example') //77amxelyCpe
+const id = idGenerator("example"); //0505ompj
 ```
 
 Simple generation with more characters:
@@ -32,7 +31,7 @@ Simple generation with more characters:
 ```javascript
 import { idGenerator } from "generate-custom-id";
 
-const id = idGenerator('example', 4) //3222epplmCqxeaN
+const id = idGenerator("example", 4); //373AfhcfAc7E
 ```
 
 Custom generation with options
@@ -46,10 +45,11 @@ const options = {
   trace: true,
 };
 
-const id = idGenerator('example', 4, options) //pre-3434mkplae5exB3-sux
+const id = idGenerator("example", 2, 4, options); //pre-04Op40pz-sux
 ```
 
 More options...
+
 ```javascript
 import { idGenerator } from "generate-custom-id";
 
@@ -62,8 +62,13 @@ const options = {
   trace: true,
 };
 
-const id = idGenerator('example', 4, options) //pre2027empexvmaXld-sux
+const id = idGenerator("example", 4, options); //pre323vPpY2-sux
 ```
+
 ## Licença
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## Authors
+
+- [@bankow](https://www.github.com/ibankow)

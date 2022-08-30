@@ -1,9 +1,9 @@
 import { MainConfig } from "../@types";
 import random from "math-random";
-const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function getRandomInt(n: number): number {
-  const randomNumber = Math.floor(Math.random() * n);
+  const randomNumber = Math.floor(random() * n);
   return randomNumber;
 }
 
@@ -31,33 +31,54 @@ function hashGenerate(a: number, b: string): string {
 
   let str = "";
   for (let i = 0; i < randomLength; i++) {
-    str += scope.charAt(Math.floor(Math.random() * length));
+    let newLetter = scope.charAt(Math.floor(random() * length));
+    while (true) {
+      if (newLetter === str.slice(-1)) {
+        newLetter = scope.charAt(Math.floor(random() * length));
+      } else {
+        str += newLetter;
+        break;
+      }
+    }
   }
   return str;
 }
 
-function crypticSecureGenerate(length: number): string {
+function crypticSecureGenerate(): string {
   const timeStamp = new Date().getTime();
   const crypto = random();
   const crypticSecureFun = crypto * timeStamp;
   const crypticSecure = Math.floor(crypticSecureFun);
-  return hashGenerate(length, crypticSecure.toString());
+  return crypticSecure.toString();
 }
 
-function generateCustomId(name: string, randomLength: number): string {
-  const length = randomLength || 2;
-  const crypticSecure = crypticSecureGenerate(length);
-  const firstHash = hashGenerate(length, crypticSecure.toString());
-  const lastHash = hashGenerate(length, letters);
-  const nameHash = shuffle(name + lastHash);
+function generateCustomId(name: string, pin: number, randomLength: number): string {
+  const length = randomLength;
+  const pinLength = pin;
+  const crypticSecure = crypticSecureGenerate();
+  const firstHash = hashGenerate(pinLength, crypticSecure.toString());
+  const lastHash = hashGenerate(length * pinLength, letters);
+  const nameShuffle = shuffle(name);
+  const nameHash = hashGenerate(length, nameShuffle + lastHash);
 
   const result = firstHash + nameHash;
 
-  return result;
+  const resultShuffle = shuffle(result);
+
+  return firstHash + resultShuffle;
 }
 
-export function idGenerator(name: string, length: number = 2, config?: MainConfig): string {
-  let hash = generateCustomId(name, length);
+/**
+ * Esta é uma função de exemplo de uso de JSDoc
+ * @example   example('exemple', 2, 4); // 45leml
+ * @param {String} name
+ * @param {String} [pin]
+ * @param {String} [length]
+ * @param {MainConfig} [config]
+ * @returns {string} hash
+ */
+export function idGenerator(name: string, pin: number = 2, length: number = 4, config?: MainConfig): string {
+  let hash = generateCustomId(name, pin, length);
   if (typeof config?.prefix === "string") {
     if (config?.prefix) {
       if (config?.trace) {
