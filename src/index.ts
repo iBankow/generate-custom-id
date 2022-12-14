@@ -52,20 +52,17 @@ function crypticSecureGenerate(): string {
   return crypticSecure.toString();
 }
 
-function generateCustomId(name: string, pin: number, randomLength: number): string {
-  const length = randomLength;
-  const pinLength = pin;
+function generateCustomId(name: string, pinLength: number, randomLength: number): string {
   const crypticSecure = crypticSecureGenerate();
-  const firstHash = hashGenerate(pinLength, crypticSecure.toString());
-  const lastHash = hashGenerate(length * pinLength, letters);
+  const firstPin = hashGenerate(pinLength, crypticSecure.toString());
+  const secondPin = hashGenerate(pinLength, crypticSecure.toString());
+  const randomLetters = hashGenerate(randomLength * pinLength, letters);
   const nameShuffle = shuffle(name);
-  const nameHash = hashGenerate(length, nameShuffle + lastHash);
+  const nameHash = hashGenerate(randomLength, nameShuffle + randomLetters);
+  
+  const resultShuffle = shuffle(nameHash + secondPin);
 
-  const result = firstHash + nameHash;
-
-  const resultShuffle = shuffle(result);
-
-  return firstHash + resultShuffle;
+  return firstPin + resultShuffle;
 }
 
 /**

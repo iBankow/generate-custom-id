@@ -41,11 +41,11 @@ import { idGenerator } from "generate-custom-id";
 
 const options = {
   prefix: "pre",
-  sufix: "sux",
+  sufix: "suf",
   trace: true,
 };
 
-const id = idGenerator("example", 2, 4, options); //pre-04Op40pz-sux
+const id = idGenerator("example", 2, 4, options); //pre-04Op40pz-suf
 ```
 
 More options...
@@ -58,11 +58,11 @@ const options = {
     prefix: "pre",
     trace: false,
   },
-  sufix: "sux",
+  sufix: "suf",
   trace: true,
 };
 
-const id = idGenerator("example", 4, options); //pre323vPpY2-sux
+const id = idGenerator("example", 4, options); //pre323vPpY2-suf
 ```
 
 ## Licença

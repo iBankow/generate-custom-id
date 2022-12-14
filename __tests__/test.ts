@@ -9,8 +9,8 @@ test("Generate a hash with simple prefix", () => {
   expect(newId).toMatch(/pre[0-9]{2}/);
 });
 test("Generate a hash with simple sufix", () => {
-  const newId = idGenerator("simple", undefined, undefined, { sufix: "sux" });
-  expect(newId).toMatch(/[0-9]{2}|[A-z|0-9]{6}|sux/);
+  const newId = idGenerator("simple", undefined, undefined, { sufix: "suf" });
+  expect(newId).toMatch(/[0-9]{2}|[A-z|0-9]{6}|suf/);
 });
 test("Generate a hash with 4 PIN lenght and 8 random character", () => {
   const newId = idGenerator("simple", 4, 6);
