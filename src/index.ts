@@ -59,7 +59,7 @@ function generateCustomId(name: string, pinLength: number, randomLength: number)
   const randomLetters = hashGenerate(randomLength * pinLength, letters);
   const nameShuffle = shuffle(name);
   const nameHash = hashGenerate(randomLength, nameShuffle + randomLetters);
-  
+
   const resultShuffle = shuffle(nameHash + secondPin);
 
   return firstPin + resultShuffle;
